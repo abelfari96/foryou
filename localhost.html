@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para Ti ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to bottom right, #ffdde1, #ee9ca7);
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      color: #333;
+      max-width: 90%;
+    }
+
+    .mensaje {
+      font-size: 1.5rem;
+      margin: 20px 0;
+      display: none;
+    }
+
+    .dialogo {
+      display: none;
+      margin-top: 30px;
+    }
+
+    button {
+      padding: 15px 25px;
+      font-size: 1rem;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .si {
+      background-color: #ff4d6d;
+      color: white;
+    }
+
+    .no {
+      background-color: #ccc;
+      color: black;
+      position: absolute;
+    }
+
+    .final {
+      display: none;
+      font-size: 2rem;
+      color: #fff;
+      background: rgba(0,0,0,0.5);
+      padding: 30px;
+      border-radius: 20px;
+    }
+  </style>
+</head>
+<body oncontextmenu="return true;" onkeydown="return false;">
+
+  <div class="container">
+    <div id="mensajes">
+      <div class="mensaje">Hola ❤️</div>
+      <div class="mensaje">Quiero decirte algo muy especial...</div>
+      <div class="mensaje">Desde que llegaste a mi vida...</div>
+      <div class="mensaje">Todo es más bonito 💕</div>
+      <div class="mensaje">Así que tengo una pregunta para ti...</div>
+    </div>
+
+    <div class="dialogo" id="dialogo">
+      <h2>¿Quieres ser mi novia? 💖</h2>
+      <button class="si" onclick="aceptar()">Sí</button>
+      <button class="no" id="noBtn">No</button>
+    </div>
+
+    <div class="final" id="final">
+      🎉 ¡Sabía que dirías que sí! 💘  
+      Gracias por hacerme la persona más feliz 💕
+      <br><br>
+      <button onclick="window.close()">Cerrar</button>
+    </div>
+  </div>
+
+  <script>
+    let mensajes = document.querySelectorAll(".mensaje");
+    let i = 0;
+
+    function mostrarMensajes() {
+      if (i < mensajes.length) {
+        mensajes[i].style.display = "block";
+        i++;
+        setTimeout(mostrarMensajes, 2000);
+      } else {
+        document.getElementById("dialogo").style.display = "block";
+      }
+    }
+
+    mostrarMensajes();
+
+    // Botón No escapa
+    const noBtn = document.getElementById("noBtn");
+    noBtn.addEventListener("mouseover", moverNo);
+    noBtn.addEventListener("touchstart", moverNo);
+
+    function moverNo() {
+      let x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+      let y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+
+    function aceptar() {
+      document.getElementById("dialogo").style.display = "none";
+      document.getElementById("final").style.display = "block";
+    }
+
+    // Evita retroceder
+    history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+      history.go(1);
+    };
+  </script>
+
+</body>
+</html>
